@@ -41,6 +41,8 @@ const mapStateToProps = (state) => {
   }
 }
 
+export default connect(mapStateToProps, { loadDecks })(DeckList)
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -70,5 +72,3 @@ const styles = StyleSheet.create({
     color: colors.grey
   }
 })
-
-export default connect(mapStateToProps, { loadDecks })(DeckList)

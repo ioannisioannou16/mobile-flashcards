@@ -1,8 +1,4 @@
-import {
-  SAVE_DECK,
-  LOAD_DECKS,
-  SAVE_CARD
-} from '../actions/index'
+import { LOAD_DECKS, SAVE_CARD, SAVE_DECK } from '../actions/index'
 
 const decks = (state = {}, action) => {
   switch (action.type) {

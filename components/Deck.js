@@ -36,6 +36,8 @@ const mapStateToProps = (state, ownProps) => {
   return { name, numOfCards: state[name].length }
 }
 
+export default connect(mapStateToProps)(Deck)
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -68,5 +70,3 @@ const styles = StyleSheet.create({
     color: colors.black,
   }
 })
-
-export default connect(mapStateToProps)(Deck)

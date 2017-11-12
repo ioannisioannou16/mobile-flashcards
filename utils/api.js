@@ -26,7 +26,7 @@ export const saveCardToStorage = (deckId, card) => (
 )
 
 const notification = {
-  title: 'Study!',
+  title: 'Study',
   body: "Don't forget to study today!",
   android: {
     sound: true,

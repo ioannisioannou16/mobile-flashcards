@@ -1,5 +1,5 @@
 import React from 'react'
-import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableHighlight, ToastAndroid } from 'react-native'
+import { KeyboardAvoidingView, StyleSheet, Text, TextInput, ToastAndroid, TouchableHighlight } from 'react-native'
 import { saveDeck } from '../actions'
 import { connect } from 'react-redux'
 import * as colors from '../utils/colors'
@@ -39,8 +39,8 @@ class NewDeck extends React.Component {
           onChangeText={this.handleTextChange}
           style={styles.input}
         />
-        <TouchableHighlight disabled={disabled} style={[styles.submitButton, opacity]} onPress={this.handlePress} underlayColor="#E79794">
-          <Text style={styles.submitText}>Create Deck</Text>
+        <TouchableHighlight disabled={disabled} style={[styles.button, opacity]} onPress={this.handlePress} underlayColor={colors.lightPink}>
+          <Text style={styles.buttonText}>Create Deck</Text>
         </TouchableHighlight>
       </KeyboardAvoidingView>
     )
@@ -52,6 +52,8 @@ const mapStateToProps = (state) => {
     deckNames: Object.keys(state)
   }
 }
+
+export default connect(mapStateToProps, { saveDeck })(NewDeck)
 
 const styles = StyleSheet.create({
   container: {
@@ -72,7 +74,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: colors.black
   },
-  submitButton: {
+  button: {
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: colors.white,
@@ -80,10 +82,8 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     elevation: 2
   },
-  submitText: {
+  buttonText: {
     fontSize: 25,
     color: colors.black
   }
 })
-
-export default connect(mapStateToProps, { saveDeck })(NewDeck)

@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { StyleSheet, Text, View } from 'react-native'
-import { TouchableHighlight, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, TouchableHighlight, TouchableOpacity, View } from 'react-native'
 import * as colors from '../utils/colors'
 import { clearLocalNotification, setLocalNotification } from '../utils/api'
 
@@ -12,9 +11,7 @@ class Quiz extends React.Component {
     this.state = { currentIndex: 0, correctAnswers: 0, showQuestion: true }
   }
 
-  flip = () => {
-    this.setState({ showQuestion: !this.state.showQuestion })
-  }
+  flip = () => this.setState({ showQuestion: !this.state.showQuestion })
 
   answerQuestion = (correct) => () => {
     if (correct) {
@@ -28,14 +25,9 @@ class Quiz extends React.Component {
     }
   }
 
-  resetNotification = () => {
-    clearLocalNotification()
-      .then(() => setLocalNotification())
-  }
+  resetNotification = () => clearLocalNotification().then(() => setLocalNotification())
 
-  reset = () => {
-    this.setState({ currentIndex: 0, correctAnswers: 0, showQuestion: true })
-  }
+  reset = () => this.setState({ currentIndex: 0, correctAnswers: 0, showQuestion: true })
 
   goBack = () => this.props.navigation.goBack()
 
@@ -63,7 +55,7 @@ class Quiz extends React.Component {
         <View>
           <Text style={styles.currentScore}>{this.state.currentIndex + 1} / {this.props.numOfCards}</Text>
         </View>
-        <View style={{ flex: 1, justifyContent: 'space-around' }}>
+        <View style={[styles.container, { justifyContent: 'space-around' }]}>
           <View>
             <Text style={styles.questionOrAnswer}>{this.state.showQuestion ? currCard.question : currCard.answer }</Text>
             <TouchableOpacity onPress={this.flip}>
@@ -90,6 +82,14 @@ class Quiz extends React.Component {
       : this.renderQuiz()
   }
 }
+
+const mapStateToProps = (state, ownProps) => {
+  const name = ownProps.navigation.state.params.name
+  const cards = state[name]
+  return { name, cards, numOfCards: cards.length }
+}
+
+export default connect(mapStateToProps)(Quiz)
 
 const styles = StyleSheet.create({
   container: {
@@ -135,11 +135,3 @@ const styles = StyleSheet.create({
     marginBottom: 10
   }
 })
-
-const mapStateToProps = (state, ownProps) => {
-  const name = ownProps.navigation.state.params.name
-  const cards = state[name]
-  return { name, cards, numOfCards: cards.length }
-}
-
-export default connect(mapStateToProps)(Quiz)

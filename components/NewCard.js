@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { StyleSheet, Text, TextInput, TouchableHighlight, View, ToastAndroid } from 'react-native'
+import { StyleSheet, Text, TextInput, ToastAndroid, TouchableHighlight, View } from 'react-native'
 import { saveCard } from '../actions'
 import * as colors from '../utils/colors'
 
@@ -34,23 +34,25 @@ class NewCard extends React.Component {
           value={this.state.question}
           onChangeText={this.handleQuestionChange}
           style={styles.input}
-          placeholder='type your question here..'
+          placeholder='question'
           placeholderTextColor={colors.grey}
         />
         <TextInput
           value={this.state.answer}
           onChangeText={this.handleAnswerChange}
           style={styles.input}
-          placeholder='type your answer here..'
+          placeholder='answer'
           placeholderTextColor={colors.grey}
         />
-        <TouchableHighlight disabled={disabled} style={[styles.submitButton, opacity]} onPress={this.handlePress} underlayColor="#E79794">
-          <Text style={styles.submitText}>Create card</Text>
+        <TouchableHighlight disabled={disabled} style={[styles.button, opacity]} onPress={this.handlePress} underlayColor={colors.lightPink}>
+          <Text style={styles.buttonText}>Create card</Text>
         </TouchableHighlight>
       </View>
     )
   }
 }
+
+export default connect(null, { saveCard })(NewCard)
 
 const styles = StyleSheet.create({
   container: {
@@ -67,7 +69,7 @@ const styles = StyleSheet.create({
     color: colors.black,
     marginBottom: 10
   },
-  submitButton: {
+  button: {
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: colors.white,
@@ -75,10 +77,8 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     elevation: 2
   },
-  submitText: {
+  buttonText: {
     fontSize: 25,
     color: colors.black
   }
 })
-
-export default connect(null, { saveCard })(NewCard)
