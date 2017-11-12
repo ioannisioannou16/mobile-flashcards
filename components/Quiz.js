@@ -42,7 +42,7 @@ class Quiz extends React.Component {
           <Text style={styles.buttonText}>Restart Quiz</Text>
         </TouchableHighlight>
         <TouchableHighlight style={styles.button} onPress={this.goBack} underlayColor={colors.lightPink}>
-          <Text style={styles.buttonText}>Go Back</Text>
+          <Text style={styles.buttonText}>Back to Deck</Text>
         </TouchableHighlight>
       </View>
     </View>

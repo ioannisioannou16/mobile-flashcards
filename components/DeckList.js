@@ -15,10 +15,18 @@ class DeckList extends React.Component {
   }
 
   render() {
+    const decks = this.props.decks
+    if (!decks.length) {
+      return (
+        <View style={styles.centered}>
+          <Text style={styles.noDecksText}>No Decks</Text>
+        </View>
+      )
+    }
     return (
       <View style={styles.container}>
         <FlatList
-          data={this.props.decks}
+          data={decks}
           renderItem={({ item, index }) => (
             <TouchableHighlight style={[styles.button, { marginTop: !index ? 10 : 0 }]} onPress={this.handlePress(item.name)} underlayColor={colors.lightPink} >
               <View>
@@ -70,5 +78,15 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 14,
     color: colors.grey
+  },
+  centered: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  noDecksText: {
+    textAlign: 'center',
+    fontSize: 40,
+    color: colors.black
   }
 })
