@@ -33,7 +33,7 @@ class Deck extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   const name = ownProps.navigation.state.params.name
-  return { name, numOfCards: state[name].length }
+  return { name, numOfCards: state.decks[name].length }
 }
 
 export default connect(mapStateToProps)(Deck)

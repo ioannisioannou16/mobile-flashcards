@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { StyleSheet, Text, TouchableHighlight, TouchableOpacity, View } from 'react-native'
 import * as colors from '../utils/colors'
-import { clearLocalNotification, setLocalNotification } from '../utils/api'
+import { clearNotification, setNotification } from '../actions'
 
 class Quiz extends React.Component {
 
@@ -25,7 +25,7 @@ class Quiz extends React.Component {
     }
   }
 
-  resetNotification = () => clearLocalNotification().then(() => setLocalNotification())
+  resetNotification = () => this.props.clearNotification().then(() => this.props.setNotification())
 
   reset = () => this.setState({ currentIndex: 0, correctAnswers: 0, showQuestion: true })
 
@@ -55,7 +55,7 @@ class Quiz extends React.Component {
         <View>
           <Text style={styles.currentScore}>{this.state.currentIndex + 1} / {this.props.numOfCards}</Text>
         </View>
-        <View style={[styles.container, { justifyContent: 'space-around' }]}>
+        <View style={{ flex: 1, justifyContent: 'space-around' }}>
           <View>
             <Text style={styles.questionOrAnswer}>{this.state.showQuestion ? currCard.question : currCard.answer }</Text>
             <TouchableOpacity onPress={this.flip}>
@@ -85,16 +85,17 @@ class Quiz extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   const name = ownProps.navigation.state.params.name
-  const cards = state[name]
+  const cards = state.decks[name]
   return { name, cards, numOfCards: cards.length }
 }
 
-export default connect(mapStateToProps)(Quiz)
+export default connect(mapStateToProps, { clearNotification, setNotification })(Quiz)
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'flex-start',
+    alignItems: 'stretch',
     paddingLeft: 10,
     paddingRight: 10
   },

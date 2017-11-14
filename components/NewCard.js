@@ -19,10 +19,8 @@ class NewCard extends React.Component {
     const { question, answer } = this.state
     const { navigation, saveCard } = this.props
     saveCard(navigation.state.params.name, { question, answer })
-      .then(() => {
-        navigation.goBack()
-        ToastAndroid.show('Successfully created new card.', ToastAndroid.SHORT)
-      })
+    navigation.goBack()
+    ToastAndroid.show('Successfully created new card.', ToastAndroid.SHORT)
   }
 
   render() {

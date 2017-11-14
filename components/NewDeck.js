@@ -20,11 +20,9 @@ class NewDeck extends React.Component {
       ToastAndroid.show("Deck already exists. Try a different name.", ToastAndroid.SHORT)
     } else {
       saveDeck(name)
-        .then(() => {
-          navigation.navigate('Deck', { name })
-          ToastAndroid.show('Successfully created new deck.', ToastAndroid.SHORT)
-          this.setState({ input: '' })
-        })
+      navigation.navigate('Deck', { name })
+      ToastAndroid.show('Successfully created new deck.', ToastAndroid.SHORT)
+      this.setState({ input: '' })
     }
   }
 
@@ -49,7 +47,7 @@ class NewDeck extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    deckNames: Object.keys(state)
+    deckNames: Object.keys(state.decks)
   }
 }
 

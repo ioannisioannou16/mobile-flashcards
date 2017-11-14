@@ -1,13 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { FlatList, StyleSheet, Text, TouchableHighlight, View } from 'react-native'
-import { loadDecks } from '../actions'
+import { setNotification } from '../actions'
 import * as colors from '../utils/colors'
 
 class DeckList extends React.Component {
 
   componentDidMount() {
-    this.props.loadDecks()
+    this.props.setNotification()
   }
 
   handlePress = (name) => () => {
@@ -44,12 +44,12 @@ class DeckList extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    decks: Object.entries(state)
+    decks: Object.entries(state.decks)
       .map(([name, cards]) => ({ name, numOfCards: cards.length }))
   }
 }
 
-export default connect(mapStateToProps, { loadDecks })(DeckList)
+export default connect(mapStateToProps, { setNotification })(DeckList)
 
 const styles = StyleSheet.create({
   container: {
